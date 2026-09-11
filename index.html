@@ -3,593 +3,475 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bablu Pal — WordPress Developer</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+<title>Bablu Pal | WordPress &amp; UI Developer Portfolio</title>
+<meta name="description" content="Portfolio of Bablu Pal — Senior UI &amp; WordPress Developer with 8+ years building 350+ responsive, SEO-configured websites, accelerated with AI tools like Antigravity IDE, Claude AI and ChatGPT.">
 
-  :root{
-    --bg: #10141a;
-    --panel: #171e27;
-    --panel-2: #1d2530;
-    --text: #e8ecf1;
-    --muted: #8b95a5;
-    --accent: #f2b134;
-    --accent-soft: rgba(242,177,52,0.12);
-    --border: #262f3b;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Inter',sans-serif;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit;}
-  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-  /* NAV */
-  nav{
-    position:sticky;top:0;z-index:10;
-    background:rgba(16,20,26,0.85);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--border);
-  }
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;}
-  .brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;}
-  .brand span{color:var(--accent);}
-  nav .links{display:flex;align-items:center;gap:24px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);}
-  nav .links a{text-decoration:none;}
-  nav .links a:hover{color:var(--accent);}
-
-  /* HAMBURGER */
-  .hamburger{
-    display:none;
-    flex-direction:column;
-    justify-content:center;
-    gap:5px;
-    width:34px;height:34px;
-    background:none;border:none;cursor:pointer;
-    padding:0;
-  }
-  .hamburger span{
-    display:block;width:100%;height:2px;
-    background:var(--text);
-    border-radius:2px;
-    transition:transform .3s ease, opacity .3s ease;
-  }
-  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-  .hamburger.open span:nth-child(2){opacity:0;}
-  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-
-  .mobile-menu{
-    display:flex;
-    flex-direction:column;
-    max-height:0;
-    overflow:hidden;
-    background:var(--panel);
-    border-bottom:1px solid var(--border);
-    transition:max-height .3s ease;
-  }
-  .mobile-menu.open{max-height:260px;}
-  .mobile-menu a{
-    font-family:'JetBrains Mono',monospace;
-    font-size:14px;
-    color:var(--muted);
-    text-decoration:none;
-    padding:14px 24px;
-    border-top:1px solid var(--border);
-  }
-  .mobile-menu a:hover{color:var(--accent);background:var(--accent-soft);}
-  .nav-resume{
-    position:relative;
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    background:linear-gradient(135deg, var(--accent), #ffd27a);
-    color:#10141a !important;
-    font-weight:600;
-    padding:8px 16px;
-    border-radius:8px;
-    border:none;
-    overflow:hidden;
-    isolation:isolate;
-    box-shadow:0 0 0 0 rgba(242,177,52,0.5);
-    animation:resumePulse 2.6s ease-in-out infinite;
-    transition:transform .25s ease, box-shadow .25s ease;
-  }
-  .nav-resume:hover{
-    transform:translateY(-2px);
-    box-shadow:0 6px 18px rgba(242,177,52,0.35);
-  }
-  .nav-resume svg{
-    width:14px;height:14px;
-    transition:transform .3s ease;
-  }
-  .nav-resume:hover svg{transform:translateY(2px);}
-  .nav-resume::before{
-    content:"";
-    position:absolute;
-    top:0;left:-75%;
-    width:50%;height:100%;
-    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.55), transparent);
-    transform:skewX(-20deg);
-    z-index:-1;
-    transition:left .6s ease;
-  }
-  .nav-resume:hover::before{left:130%;}
-  @keyframes resumePulse{
-    0%,100%{box-shadow:0 0 0 0 rgba(242,177,52,0.45);}
-    50%{box-shadow:0 0 0 6px rgba(242,177,52,0);}
-  }
-  @media (prefers-reduced-motion: reduce){
-    .nav-resume{animation:none;}
-    .nav-resume::before{display:none;}
-  }
-
-  /* RESUME DROPDOWN */
-  .resume-dropdown{position:relative;display:inline-block;}
-  .resume-toggle{cursor:pointer;font:inherit;}
-  .resume-menu{
-    position:absolute;
-    top:calc(100% + 10px);
-    right:0;
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:10px;
-    overflow:hidden;
-    min-width:200px;
-    box-shadow:0 12px 32px rgba(0,0,0,0.4);
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(-6px);
-    transition:opacity .18s ease, transform .18s ease, visibility .18s ease;
-    z-index:30;
-  }
-  .resume-dropdown.open .resume-menu{opacity:1;visibility:visible;transform:translateY(0);}
-  .resume-menu a{
-    display:block;
-    padding:12px 16px;
-    font-family:'JetBrains Mono',monospace;
-    font-size:13px;
-    color:var(--text);
-    text-decoration:none;
-    border-bottom:1px solid var(--border);
-  }
-  .resume-menu a:last-child{border-bottom:none;}
-  .resume-menu a:hover{background:var(--accent-soft);color:var(--accent);}
-  .contact-resume .resume-menu{right:auto;left:0;}
-
-  /* HERO */
-  header.hero{padding:88px 0 64px;border-bottom:1px solid var(--border);}
-  .eyebrow{
-    font-family:'JetBrains Mono',monospace;
-    font-size:13px;color:var(--accent);
-    letter-spacing:0.08em;
-    display:flex;align-items:center;gap:10px;
-    margin-bottom:20px;
-  }
-  .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);}
-  h1{
-    font-family:'Space Grotesk',sans-serif;
-    font-weight:700;
-    font-size:clamp(34px,5.5vw,56px);
-    line-height:1.08;
-    letter-spacing:-0.02em;
-    margin:0 0 20px;
-  }
-  h1 .role{color:var(--muted);}
-  .pitch{max-width:560px;color:var(--muted);font-size:17px;margin-bottom:36px;}
-  .stats{display:flex;gap:36px;flex-wrap:wrap;}
-  .stat b{font-family:'Space Grotesk',sans-serif;display:block;font-size:26px;color:var(--text);}
-  .stat span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;}
-
-  /* SECTION HEADS */
-  .section{padding:64px 0;border-bottom:1px solid var(--border);}
-  .section-head{margin-bottom:40px;}
-  .section-head .tag{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;display:block;}
-  .section-head h2{font-family:'Space Grotesk',sans-serif;font-size:28px;margin:0;letter-spacing:-0.01em;}
-
-  /* PROJECTS */
-  .project{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:14px;
-    overflow:hidden;
-    margin-bottom:28px;
-    transition:border-color .2s ease, transform .2s ease;
-  }
-  .project:hover{border-color:#3a4759;transform:translateY(-2px);}
-  .browser-frame{background:var(--panel-2);}
-  .browser-bar{
-    display:flex;align-items:center;gap:8px;
-    padding:10px 14px;
-    border-bottom:1px solid var(--border);
-  }
-  .dots{display:flex;gap:6px;}
-  .dots i{width:9px;height:9px;border-radius:50%;background:#3a4759;display:block;}
-  .addr{
-    flex:1;
-    background:var(--bg);
-    border-radius:6px;
-    padding:5px 12px;
-    font-family:'JetBrains Mono',monospace;
-    font-size:12px;
-    color:var(--muted);
-    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-    text-align:center;
-  }
-  .shot{display:block;width:100%;height:auto;border-bottom:1px solid var(--border);}
-  .project-body{padding:22px 24px 26px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;align-items:flex-start;}
-  .project-body h3{font-family:'Space Grotesk',sans-serif;font-size:19px;margin:0 0 6px;}
-  .project-body p{margin:0;color:var(--muted);font-size:14.5px;max-width:460px;}
-  .visit{
-    font-family:'JetBrains Mono',monospace;
-    font-size:13px;
-    color:var(--accent);
-    text-decoration:none;
-    white-space:nowrap;
-    padding:9px 16px;
-    border:1px solid var(--accent);
-    border-radius:8px;
-    transition:background .2s ease, color .2s ease;
-  }
-  .visit:hover{background:var(--accent);color:#10141a;}
-
-  /* SKILLS */
-  .tags{display:flex;flex-wrap:wrap;gap:10px;}
-  .tags span{
-    font-family:'JetBrains Mono',monospace;
-    font-size:13px;
-    background:var(--panel);
-    border:1px solid var(--border);
-    color:var(--text);
-    padding:8px 14px;
-    border-radius:8px;
-  }
-
-  /* AI WORKFLOW */
-  .ai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-  .ai-card{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:22px 20px;
-  }
-  .ai-icon{
-    min-width:38px;height:38px;
-    padding:0 8px;
-    border-radius:9px;
-    background:var(--accent-soft);
-    display:inline-flex;align-items:center;justify-content:center;
-    margin-bottom:16px;
-  }
-  .ai-icon svg{width:20px;height:20px;stroke:var(--accent);}
-  .ai-badge{
-    font-family:'JetBrains Mono',monospace;
-    font-weight:600;
-    font-size:13px;
-    letter-spacing:0.03em;
-    color:var(--accent);
-  }
-  .ai-card .num{
-    font-family:'JetBrains Mono',monospace;
-    font-size:12px;
-    color:var(--accent);
-    display:block;
-    margin-bottom:10px;
-  }
-  .ai-card h3{font-family:'Space Grotesk',sans-serif;font-size:17px;margin:0 0 8px;}
-  .ai-card p{margin:0;color:var(--muted);font-size:14px;}
-  @media (max-width:700px){
-    .ai-grid{grid-template-columns:1fr;}
-  }
-
-  /* CONTACT */
-  .contact{padding:72px 0 88px;border-bottom:none;}
-  .contact h2{font-family:'Space Grotesk',sans-serif;font-size:30px;margin:0 0 14px;}
-  .contact p{color:var(--muted);margin-bottom:28px;}
-  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
-  .btn{
-    font-family:'JetBrains Mono',monospace;
-    font-size:14px;
-    padding:12px 22px;
-    border-radius:9px;
-    text-decoration:none;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    transition:transform .2s ease, border-color .2s ease, color .2s ease, background .2s ease, box-shadow .2s ease;
-  }
-  .btn svg{width:15px;height:15px;transition:transform .3s ease;}
-  .btn.primary{background:var(--accent);color:#10141a;font-weight:600;}
-  .btn.primary:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(242,177,52,0.3);}
-  .btn.ghost{background:transparent;border:1px solid var(--border);color:var(--text);}
-  button.btn{appearance:none;-webkit-appearance:none;font-family:inherit;}
-  .btn.ghost:hover{
-    border-color:var(--accent);
-    color:var(--accent);
-    background:var(--accent-soft);
-    transform:translateY(-2px);
-  }
-  .btn.ghost:hover svg{transform:translateY(2px);}
-
-  footer{padding:28px 0;text-align:center;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;}
-
-  @media (max-width:640px){
-      nav .links a {display: none;}
-    .resume-menu a {display: block !important;}
-    /* nav .links a:not(.nav-resume){display:none;} */
-    nav .links{gap:0;}
-    .hamburger{display:flex;}
-    .stats{gap:24px;}
-    .project-body{flex-direction:column;}
-    .visit{align-self:flex-start;}
-  }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="cursorGlow"></div>
 
-<nav>
-  <div class="wrap">
-    <div class="brand">Bablu<span>.</span>Pal</div>
-    <div class="links">
-      <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-      <div class="resume-dropdown">
-        <button type="button" class="nav-resume resume-toggle" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg>Download Resume</button>
-        <div class="resume-menu">
-          <a href="https://bablupal471-maker.github.io/Portfolio/Bablu_Pal_Resume.pdf" download="Bablu_Pal_Resume.pdf">Download as PDF</a>
-          <a href="https://bablupal471-maker.github.io/Portfolio/Bablu_Pal_Resume.docx" download="Bablu_Pal_Resume.docx">Download as Word (.docx)</a>
-        </div>
-      </div>
-    </div>
-    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-expand-lg fixed-top py-3">
+  <div class="container">
+    <a class="navbar-brand" href="#home">Bablu<span>.</span></a>
+    <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <i class="bi bi-list fs-2 text-white"></i>
     </button>
-  </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#about">About</a>
-    <a href="#work">Work</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav mx-auto mt-3 mt-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn btn-grad d-none d-lg-inline-block">Hire Me</a>
+    </div>
   </div>
 </nav>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="eyebrow">AVAILABLE FOR WORK</div>
-    <h1>Bablu Pal<br><span class="role">WordPress Developer</span></h1>
-    <p class="pitch">I build and customize WordPress sites through AI-powered workflows — primarily Antigravity IDE, with Claude AI and ChatGPT alongside — customizing themes, plugins, and responsive front-ends for real businesses that need to be online and working.</p>
-    <div class="stats">
-      <div class="stat"><b>4</b><span>Sites Shipped</span></div>
-      <div class="stat"><b>WordPress</b><span>Core Platform</span></div>
-      <div class="stat"><b>HTML·CSS·JS</b><span>Customization</span></div>
+<!-- ================= HERO ================= -->
+<section class="hero" id="home">
+  <div class="container position-relative" style="z-index:1;">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-7">
+        <span class="badge-pill mb-4"><span class="dot"></span> Open to Collaboration</span>
+        <h1 class="mb-3">Hi, I'm <span class="text-grad">Bablu Pal</span></h1>
+        <div class="role-line mb-3">
+          I am a <span class="text-grad" id="typedRole"></span><span class="cursor">&nbsp;</span>
+        </div>
+        <p class="lead-text mb-4">
+          Senior UI &amp; WordPress Developer at Business Thrust Techsoft with 8+ years shipping 350+ responsive,
+          SEO-configured websites — now building faster with AI-powered tools like Antigravity IDE, Claude AI
+          and ChatGPT for theme customization, dynamic PHP builds and plugin workflows.
+        </p>
+        <div class="d-flex flex-wrap gap-3 mb-4">
+          <a href="#projects" class="btn btn-grad">Explore Projects <i class="bi bi-arrow-right ms-1"></i></a>
+          <a href="#contact" class="btn btn-outline-line">Get In Touch</a>
+        </div>
+        <div class="social-row">
+          <a href="https://github.com/bablupal471-maker" title="GitHub" target="_blank"><i class="bi bi-github"></i></a>
+          <a href="https://www.linkedin.com/in/bablu-pal" title="LinkedIn" target="_blank"><i class="bi bi-linkedin"></i></a>
+          <a href="mailto:bablupal471@gmail.com" title="Email"><i class="bi bi-envelope"></i></a>
+          <a href="https://wa.me/919873094626" title="WhatsApp" target="_blank"><i class="bi bi-whatsapp"></i></a>
+          <a href="tel:+919873094626" title="Call"><i class="bi bi-telephone"></i></a>
+          <a href="Bablu_Pal_Resume.pdf" title="Download Resume" target="_blank"><i class="bi bi-file-earmark-arrow-down"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="avatar-wrap">
+          <div class="avatar-glow"></div>
+          <div class="avatar-card">
+            <div class="avatar-photo">
+              <img src="assets/bablu.jpg" alt="Bablu Pal">
+            </div>
+          </div>
+          <div class="float-chip chip-1"><i class="bi bi-robot"></i> AI Tools</div>
+          <div class="float-chip chip-2"><i class="bi bi-wordpress"></i> WordPress</div>
+          <div class="float-chip chip-3"><i class="bi bi-person-workspace"></i> UI Developer</div>
+        </div>
+      </div>
     </div>
   </div>
-</header>
+</section>
 
+<!-- ================= ABOUT ================= -->
 <section class="section" id="about">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="tag">About Me</span>
-      <h2>Looking for my next role</h2>
+  <div class="container">
+    <span class="eyebrow">Who I Am</span>
+    <h2 class="section-title">Bridging WordPress craft with AI-accelerated delivery</h2>
+
+    <div class="stat-band">
+      <div class="stat-item">
+        <i class="bi bi-calendar3"></i>
+        <div class="num text-grad" data-count="8" data-suffix="+">0+</div>
+        <div class="label">Years of experience</div>
+      </div>
+      <div class="stat-item">
+        <i class="bi bi-globe2"></i>
+        <div class="num text-grad" data-count="350" data-suffix="+">0+</div>
+        <div class="label">Websites shipped</div>
+      </div>
+      <div class="stat-item">
+        <i class="bi bi-layers"></i>
+        <div class="num text-grad" data-count="6" data-suffix="">0</div>
+        <div class="label">CMS &amp; platforms</div>
+      </div>
+      <div class="stat-item">
+        <i class="bi bi-phone"></i>
+        <div class="num text-grad" data-count="100" data-suffix="%">0%</div>
+        <div class="label">Responsive builds</div>
+      </div>
     </div>
-    <p style="color:var(--muted);font-size:16px;max-width:620px;margin:0;">
-      I've built and customized WordPress sites for businesses across Singapore and Malaysia — spanning home services, professional accounting, and digital marketing. My work covers themes, plugins, and responsive front-ends, and I'm currently looking for a full-time WordPress Developer position.
-    </p>
+
+    <div class="row gy-4 align-items-start">
+      <div class="col-lg-7">
+        <p style="font-size:1rem; line-height:1.8; color:var(--muted);">
+          I'm a results-driven <strong class="text-white">UI &amp; WordPress Developer</strong> with 8+ years of experience designing, developing and maintaining responsive, SEO-configured websites
+          across WordPress, Shopify, Wix, Squarespace, Strikingly and GoDaddy Website Builder.
+        </p>
+        <p style="font-size:1rem; line-height:1.8; color:var(--muted);">
+          In my current role at <strong class="text-white">Business Thrust Techsoft</strong>, I build and customize
+          WordPress themes end-to-end using Elementor and WPBakery, integrate plugins and ACF flexible content
+          layouts, and handle migrations, backups and troubleshooting. I lean on AI-powered tools — Google
+          Antigravity IDE, Claude AI and ChatGPT — to generate HTML/CSS/PHP code, build Gutenberg blocks, automate
+          plugin setup and produce SEO-friendly content, cutting revision cycles without cutting corners on quality.
+        </p>
+      </div>
+      <div class="col-lg-5">
+        <div class="profile-card">
+          <div class="profile-row">
+            <div class="ic"><i class="bi bi-geo-alt"></i></div>
+            <div><div class="lbl">Location</div><div class="val">Faridabad, Haryana</div></div>
+          </div>
+          <div class="profile-row">
+            <div class="ic"><i class="bi bi-mortarboard"></i></div>
+            <div><div class="lbl">Education</div><div class="val">B.A. (Hons.) Pol. Science</div></div>
+          </div>
+          <div class="profile-row">
+            <div class="ic"><i class="bi bi-person-badge"></i></div>
+            <div><div class="lbl">Role</div><div class="val">Sr. UI &amp; WordPress Developer</div></div>
+          </div>
+          <div class="profile-row">
+            <div class="ic"><i class="bi bi-building"></i></div>
+            <div><div class="lbl">Company</div><div class="val">Business Thrust Techsoft</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="section" id="work">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="tag">Selected Work</span>
-      <h2>Live WordPress projects</h2>
-    </div>
-
-    <div class="project">
-      <div class="browser-frame">
-        <div class="browser-bar">
-          <div class="dots"><i></i><i></i><i></i></div>
-          <div class="addr">bthrust.com</div>
+<!-- ================= SKILLS ================= -->
+<section class="section" id="skills" style="background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="container">
+    <span class="eyebrow">What I Bring</span>
+    <h2 class="section-title">Technical expertise</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="skill-card">
+          <div class="icon"><i class="bi bi-wordpress"></i></div>
+          <h3>WordPress Development</h3>
+          <ul>
+            <li>Theme installation &amp; customization</li>
+            <li>Elementor &amp; WPBakery page builders</li>
+            <li>Plugin integration &amp; ACF layouts</li>
+            <li>Custom post types &amp; Gutenberg blocks</li>
+            <li>Migration, backup &amp; restore</li>
+          </ul>
         </div>
-        <img class="shot" src="https://bablupal471-maker.github.io/Portfolio/img/bthrust.png" alt="BThrust digital marketing website screenshot">
       </div>
-      <div class="project-body">
+      <div class="col-md-6 col-lg-4">
+        <div class="skill-card">
+          <div class="icon"><i class="bi bi-robot"></i></div>
+          <h3>AI-Powered Dev Tools</h3>
+          <ul>
+            <li>Google Antigravity IDE</li>
+            <li>Claude AI</li>
+            <li>ChatGPT</li>
+            <li>Git &amp; GitHub</li>
+            <li>GitHub Copilot</li>
+            <li>AI-assisted HTML/CSS/PHP generation</li>
+            <li>Prompt engineering for rapid delivery</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="skill-card">
+          <div class="icon"><i class="bi bi-code-slash"></i></div>
+          <h3>Front-End Development</h3>
+          <ul>
+            <li>HTML5, CSS3, JavaScript, jQuery</li>
+            <li>Bootstrap</li>
+            <li>Responsive, mobile-first design</li>
+            <li>Cross-browser compatibility</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="skill-card">
+          <div class="icon"><i class="bi bi-shop"></i></div>
+          <h3>CMS &amp; E-Commerce</h3>
+          <ul>
+            <li>WordPress</li>
+            <li>Shopify · Wix · Squarespace</li>
+            <li>Strikingly</li>
+            <li>GoDaddy Website Builder</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="skill-card">
+          <div class="icon"><i class="bi bi-graph-up-arrow"></i></div>
+          <h3>SEO &amp; Optimization</h3>
+          <ul>
+            <li>On-page SEO configuration</li>
+            <li>Website performance optimization</li>
+            <li>Speed &amp; usability improvements</li>
+            <li>Content management</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="skill-card">
+          <div class="icon"><i class="bi bi-tools"></i></div>
+          <h3>Tools &amp; Platforms</h3>
+          <ul>
+            <li>Adobe Photoshop · Figma</li>
+            <li>MS Word · Excel · PowerPoint</li>
+            <li>Windows &amp; Ubuntu</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section class="section" id="experience">
+  <div class="container">
+    <span class="eyebrow">My Path</span>
+    <h2 class="section-title">Professional experience</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">Aug 2021 – Present</div>
+        <div class="tl-role">Senior UI Developer &amp; WordPress Developer</div>
+        <div class="tl-company">Business Thrust Techsoft Pvt Ltd · Noida, India</div>
+        <ul>
+          <li>Develop and maintain WordPress websites end-to-end — custom page building, theme customization and plugin integration to meet client requirements.</li>
+          <li>Build responsive, mobile-first layouts with Elementor and WPBakery, ensuring consistent performance across devices and browsers.</li>
+          <li>Diagnose and resolve bugs, performance issues and compatibility errors, reducing downtime and improving user experience.</li>
+          <li>Leverage Antigravity IDE, Claude AI and ChatGPT to generate HTML/CSS/PHP code, build ACF layouts and Gutenberg blocks, and automate plugin setup — improving turnaround time.</li>
+        </ul>
         <div>
-          <h3>BThrust Digital Marketing</h3>
-          <p>Marketing-agency site with service breakdowns, case studies, and a grant-eligibility pitch.</p>
+          <span class="tag">WordPress</span><span class="tag">Elementor</span><span class="tag">WPBakery</span>
+          <span class="tag">ACF</span><span class="tag">AI Tools</span>
         </div>
-        <a class="visit" href="https://www.bthrust.com/" target="_blank" rel="noopener">Visit site →</a>
       </div>
-    </div>
-
-    <div class="project">
-      <div class="browser-frame">
-        <div class="browser-bar">
-          <div class="dots"><i></i><i></i><i></i></div>
-          <div class="addr">digitaldotagency.com</div>
-        </div>
-        <img class="shot" src="https://bablupal471-maker.github.io/Portfolio/img/digital.png" alt="DigitaldotAgency website screenshot">
+      <div class="tl-item">
+        <div class="tl-date">Feb 2019 – Aug 2021</div>
+        <div class="tl-role">Senior Web Designer</div>
+        <div class="tl-company">Isols Group Pvt Ltd · Gurgaon, India</div>
+        <ul>
+          <li>Designed and maintained responsive client websites, keeping branding and layout consistent across devices and browsers.</li>
+          <li>Performed routine updates, content revisions and bug fixes to sustain site performance.</li>
+          <li>Conducted cross-platform and cross-browser testing ahead of deployment.</li>
+        </ul>
+        <div><span class="tag">Responsive Design</span><span class="tag">HTML/CSS</span><span class="tag">QA Testing</span></div>
       </div>
-      <div class="project-body">
-        <div>
-          <h3>DigitaldotAgency</h3>
-          <p>AI-focused digital marketing agency site — service grid, case studies, and lead-capture form.</p>
-        </div>
-        <a class="visit" href="https://digitaldotagency.com/" target="_blank" rel="noopener">Visit site →</a>
+      <div class="tl-item">
+        <div class="tl-date">Sep 2018 – Feb 2019</div>
+        <div class="tl-role">Web Designer</div>
+        <div class="tl-company">Virasat Solutions · Gurgaon, India</div>
+        <ul>
+          <li>Supported website design and layout development for client projects, contributing to front-end coding tasks.</li>
+          <li>Assisted senior designers with responsive design elements and HTML/CSS customizations.</li>
+        </ul>
+        <div><span class="tag">HTML/CSS</span><span class="tag">Layout Design</span></div>
       </div>
-    </div>
-
-    <div class="project">
-      <div class="browser-frame">
-        <div class="browser-bar">
-          <div class="dots"><i></i><i></i><i></i></div>
-          <div class="addr">hengplumbing.com</div>
-        </div>
-        <img class="shot" src="https://bablupal471-maker.github.io/Portfolio/img/hplumbing.png" alt="K. Heng Plumbing website screenshot">
-      </div>
-      <div class="project-body">
-        <div>
-          <h3>K. Heng Plumbing</h3>
-          <p>Service-business site for a Singapore plumbing company — service pages, blog, and lead-gen call-to-actions.</p>
-        </div>
-        <a class="visit" href="https://hengplumbing.com/" target="_blank" rel="noopener">Visit site →</a>
-      </div>
-    </div>
-
-    <div class="project">
-      <div class="browser-frame">
-        <div class="browser-bar">
-          <div class="dots"><i></i><i></i><i></i></div>
-          <div class="addr">tnpl.com.sg</div>
-        </div>
-        <img class="shot" src="https://bablupal471-maker.github.io/Portfolio/img/tnpl.png" alt="TN Chartered Accountants website screenshot">
-      </div>
-      <div class="project-body">
-        <div>
-          <h3>TN Chartered Accountants (TNPL)</h3>
-          <p>Corporate site for an accounting and corporate-secretarial firm — services, testimonials, and blog.</p>
-        </div>
-        <a class="visit" href="https://tnpl.com.sg/" target="_blank" rel="noopener">Visit site →</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="section" id="skills">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="tag">Toolkit</span>
-      <h2>What I work with</h2>
-    </div>
-    <div class="tags">
-      <span>WordPress</span>
-      <span>Themes</span>
-      <span>Plugins</span>
-      <span>HTML</span>
-      <span>CSS</span>
-      <span>JavaScript</span>
-      <span>PHP</span>
-      <span>Bootstrap</span>
-      <span>Responsive Design</span>
-      <span>Photoshop</span>
-      <span>Figma</span>
-    </div>
-
-    <div class="section-head" style="margin-top:40px;">
-      <span class="tag">SEO & Optimization</span>
-      <h2 style="font-size:22px;">Keeping sites fast and found</h2>
-    </div>
-    <div class="tags">
-      <span>On-Page SEO Configuration</span>
-      <span>Website Performance Optimization</span>
-      <span>Content Management</span>
-      <span>Speed & Usability Improvements</span>
-    </div>
-
-    <p style="margin-top:28px;color:var(--muted);font-size:13.5px;font-family:'JetBrains Mono',monospace;">
-      Also comfortable with: Shopify · Wix · Squarespace · Strikingly · GoDaddy Website Builder
-    </p>
-  </div>
-</section>
-
-<section class="section" id="workflow">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="tag">Workflow</span>
-      <h2>Built faster with AI tooling</h2>
-    </div>
-    <div class="ai-grid">
-      <div class="ai-card">
-        <div class="ai-icon ai-badge">AG</div>
-        <span class="num">01 · Design</span>
-        <h3>End-to-end build in Antigravity</h3>
-        <p>I run the whole process inside Antigravity IDE, with Claude AI assisting — from the first HTML/CSS design draft to a fully customized, dynamic WordPress build, end to end.</p>
-      </div>
-      <div class="ai-card">
-        <div class="ai-icon ai-badge">C</div>
-        <span class="num">02 · Build</span>
-        <h3>Dynamic WordPress build</h3>
-        <p>Claude AI and ChatGPT help convert that static design into a dynamic WordPress theme — templates, custom fields, and plugin setup included.</p>
-      </div>
-      <div class="ai-card">
-        <div class="ai-icon ai-badge">GPT</div>
-        <span class="num">03 · Deliver</span>
-        <h3>Faster turnaround</h3>
-        <p>Together, this cuts revision cycles and gets projects from brief to a live site in less time, without cutting corners on quality.</p>
+      <div class="tl-item">
+        <div class="tl-date">Apr 2018 – Sep 2018</div>
+        <div class="tl-role">Intern</div>
+        <div class="tl-company">Simran Software Solutions Pvt. Limited · Faridabad, India</div>
+        <ul>
+          <li>Gained hands-on foundational experience in website design and front-end coding as part of the internship.</li>
+        </ul>
+        <div><span class="tag">HTML/CSS</span><span class="tag">Internship</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="contact" id="contact">
-  <div class="wrap">
-    <h2>Don't have a formal case-study deck yet — but I'd be glad to walk through my work live.</h2>
-    <p>I'm happy to demonstrate my skills during an interview or technical assessment.</p>
-    <div class="cta-row">
-      <a class="btn primary" href="mailto:bablupal471@gmail.com">Email me</a>
-      <a class="btn ghost" href="https://wa.me/919873094626" target="_blank" rel="noopener">WhatsApp me</a>
-      <div class="resume-dropdown contact-resume">
-        <button type="button" class="btn ghost resume-toggle" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg>Download Resume</button>
-        <div class="resume-menu">
-          <a href="https://bablupal471-maker.github.io/Portfolio/Bablu_Pal_Resume.pdf" download="Bablu_Pal_Resume.pdf">Download as PDF</a>
-          <a href="https://bablupal471-maker.github.io/Portfolio/Bablu_Pal_Resume.docx" download="Bablu_Pal_Resume.docx">Download as Word (.docx)</a>
+<!-- ================= PROJECTS ================= -->
+<section class="section" id="projects" style="background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="container">
+    <span class="eyebrow">What I've Built</span>
+    <h2 class="section-title">Live WordPress projects</h2>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="project-card">
+          <div class="project-thumb">bthrust.com</div>
+          <div class="project-body">
+            <div class="kicker">Digital Marketing Agency</div>
+            <h3>BThrust Digital Marketing</h3>
+            <p>Marketing-agency site with service breakdowns, case studies and a grant-eligibility pitch.</p>
+            <a href="https://www.bthrust.com/" target="_blank" class="text-grad fw-semibold">Visit site <i class="bi bi-arrow-up-right"></i></a>
+          </div>
         </div>
       </div>
-      <a class="btn ghost" href="#work">See the work ↑</a>
+      <div class="col-md-6">
+        <div class="project-card">
+          <div class="project-thumb">digitaldotagency.com</div>
+          <div class="project-body">
+            <div class="kicker">AI-Focused Marketing</div>
+            <h3>DigitaldotAgency</h3>
+            <p>AI-focused digital marketing agency site — service grid, case studies and a lead-capture form.</p>
+            <a href="https://digitaldotagency.com/" target="_blank" class="text-grad fw-semibold">Visit site <i class="bi bi-arrow-up-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="project-card">
+          <div class="project-thumb">hengplumbing.com</div>
+          <div class="project-body">
+            <div class="kicker">Service Business · Singapore</div>
+            <h3>K. Heng Plumbing</h3>
+            <p>Service-business site with service pages, blog and lead-generation calls-to-action.</p>
+            <a href="https://hengplumbing.com/" target="_blank" class="text-grad fw-semibold">Visit site <i class="bi bi-arrow-up-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="project-card">
+          <div class="project-thumb">tnpl.com.sg</div>
+          <div class="project-body">
+            <div class="kicker">Corporate &amp; Accounting</div>
+            <h3>TN Chartered Accountants (TNPL)</h3>
+            <p>Corporate site for an accounting and corporate-secretarial firm — services, testimonials and blog.</p>
+            <a href="https://tnpl.com.sg/" target="_blank" class="text-grad fw-semibold">Visit site <i class="bi bi-arrow-up-right"></i></a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<footer>Bablu Pal — WordPress Developer</footer>
+<!-- ================= EDUCATION ================= -->
+<section class="section" id="education">
+  <div class="container">
+    <span class="eyebrow">Academic Credentials</span>
+    <h2 class="section-title">Education</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="stat-card">
+          <div class="fw-bold mb-1">B.A. (Hons.) Political Science</div>
+          <div class="label">Delhi University</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="stat-card">
+          <div class="fw-bold mb-1">Senior Secondary (12th)</div>
+          <div class="label">Haryana Board</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="stat-card">
+          <div class="fw-bold mb-1">Secondary (10th)</div>
+          <div class="label">Haryana Board</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<script>
-  const hamburgerBtn = document.getElementById('hamburgerBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
+<!-- ================= CONTACT ================= -->
+<section class="section" id="contact" style="background:var(--surface); border-top:1px solid var(--line);">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="eyebrow">Let's Connect</span>
+      <h2 class="fw-bold" style="font-size:clamp(1.7rem,3vw,2.4rem);">Get In Touch</h2>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-5">
+        <div class="contact-card h-100">
+          <h4 class="fw-bold mb-2">Contact Details</h4>
+          <p class="mb-4" style="font-size:.92rem; color:var(--muted);">Have an interesting project, job opportunity, or just want to chat? Reach out directly — I'm happy to walk through my work live.</p>
+          <div class="contact-item">
+            <div class="ic"><i class="bi bi-envelope"></i></div>
+            <div><div class="lbl">Email Me</div><div class="val">bablupal471@gmail.com</div></div>
+          </div>
+          <div class="contact-item">
+            <div class="ic"><i class="bi bi-whatsapp"></i></div>
+            <div><div class="lbl">Call / WhatsApp</div><div class="val">+91 9873094626</div></div>
+          </div>
+          <div class="contact-item">
+            <div class="ic"><i class="bi bi-geo-alt"></i></div>
+            <div><div class="lbl">Location</div><div class="val">Faridabad, Haryana, India</div></div>
+          </div>
+          <div class="mt-4">
+            <div class="lbl mb-2">Find me on</div>
+            <div class="d-flex flex-wrap" style="gap:.6rem;">
+              <a href="https://www.linkedin.com/in/bablu-pal" target="_blank" class="btn btn-outline-line btn-sm"><i class="bi bi-linkedin me-1"></i> LinkedIn</a>
+              <a href="https://github.com/bablupal471-maker" target="_blank" class="btn btn-outline-line btn-sm"><i class="bi bi-github me-1"></i> GitHub</a>
+              <a href="mailto:bablupal471@gmail.com" class="btn btn-outline-line btn-sm"><i class="bi bi-envelope me-1"></i> Email</a>
+              <a href="https://wa.me/919873094626" target="_blank" class="btn btn-outline-line btn-sm"><i class="bi bi-whatsapp me-1"></i> WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="contact-card h-100">
+          <h4 class="fw-bold mb-4">Send a Secure Message</h4>
+          <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+		    <!-- Web3Forms Configuration -->
+            <!-- USER: Obtain your free access token at https://web3forms.com and paste it here -->
+            <input type="hidden" name="access_key" value="3a306151-0eef-4ad1-9c41-5645de874e8d">
+            <input type="hidden" name="subject" value="New message from your portfolio site">
+			<input type="hidden" name="from_name" value="Bablu's Portfolio Form">
+			<!-- Honeypot Spam Protection Field (Invisible to users) -->
+            <input type="checkbox" name="botcheck" class="d-none" style="display:none;">
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label">Your Name</label>
+                <input type="text" class="form-control" name="name" id="cf-name" placeholder="John Doe" required>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label">Your Email</label>
+                <input type="email" class="form-control" name="email" id="cf-email" placeholder="john@example.com" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Subject</label>
+                <input type="text" class="form-control" name="project_subject" id="cf-subject" placeholder="Project Inquiry / Job Opportunity">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Message</label>
+                <textarea class="form-control" name="message" id="cf-message" rows="4" placeholder="Write your message here..." required></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-grad w-100" id="cf-submit-btn">Send Message <i class="bi bi-send ms-1"></i></button>
+              </div>
+              <div class="col-12" id="cf-status" style="font-size:.88rem; display:none;"></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  hamburgerBtn.addEventListener('click', () => {
-    const isOpen = mobileMenu.classList.toggle('open');
-    hamburgerBtn.classList.toggle('open', isOpen);
-    hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-4">
+      <div>
+        <a class="navbar-brand" href="#home">Bablu<span>.</span></a>
+        <div class="mt-1" style="max-width:340px;">UI & WordPress Developer — turning ideas into fast, responsive, AI-enhanced websites.</div>
+      </div>
+      <ul class="nav flex-column flex-md-row gap-md-4 mb-0">
+        <li class="nav-item"><a class="nav-link p-0" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link p-0" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link p-0" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link p-0" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link p-0" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <hr style="border-color:var(--line); margin:1.6rem 0 1.2rem;">
+    <div class="text-center">&copy; 2026 Bablu Pal. All rights reserved.</div>
+  </div>
+</footer>
 
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-      hamburgerBtn.classList.remove('open');
-      hamburgerBtn.setAttribute('aria-expanded', 'false');
-    });
-  });
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  document.querySelectorAll('.resume-toggle').forEach(toggle => {
-    toggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const dropdown = toggle.closest('.resume-dropdown');
-      const willOpen = !dropdown.classList.contains('open');
-      document.querySelectorAll('.resume-dropdown.open').forEach(d => {
-        d.classList.remove('open');
-        d.querySelector('.resume-toggle').setAttribute('aria-expanded', 'false');
-      });
-      if (willOpen) {
-        dropdown.classList.add('open');
-        toggle.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
-
-  document.addEventListener('click', () => {
-    document.querySelectorAll('.resume-dropdown.open').forEach(d => {
-      d.classList.remove('open');
-      d.querySelector('.resume-toggle').setAttribute('aria-expanded', 'false');
-    });
-  });
-</script>
+<script src="script.js"></script>
 </body>
 </html>
